@@ -20,6 +20,15 @@ async function handleGenerateNewShortURL(req, res) {
     }
 }
 
+async function handleGetAnal(req,res){
+    const shortId=req.params.shortId; // this is the way to take input in express basically
+    const result =await URL.findOne({shortId});
+    return res.json({
+        totalClicks:result.visitHistory.length,analytics:result.visitHistory,
+    })
+}
+
 module.exports = {
     handleGenerateNewShortURL,
+    handleGetAnal
 };
