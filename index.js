@@ -1,11 +1,17 @@
-const express = require("express");
-const app=express();
-const urlRoute=require("./routes/user");
-const {connectMongoDb}=require("./connect");
+const express =require("express");
+const app =express();
+const urlRoute =require("./routes/user");
+const {connectMongoDb} =require("./connect");
 const PORT =8001;
 
-connectMongoDb("mongodb://127.0.0.1:27017/short-URL").then(()=>console.log("MongoDB connected"))
+// Connect to MongoDB
+connectMongoDb("mongodb://127.0.0.1:27017/short-URL").then(() => console.log("MongoDB connected"));
 
-app.use("/url",urlRoute);
+// Middleware to parse JSON bodies
+app.use(express.json());
 
-app.listen(PORT,()=> console.log(`Server Started at port ${PORT}`));
+// Use URL rxoutes
+app.use("/url", urlRoute);
+
+// Start the server
+app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
