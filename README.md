@@ -64,13 +64,13 @@ A simple URL shortener application built using Node.js, Express, and Mongoose. T
 
 ### Project Structure
 ├── controllers
-│   └── url.js
+│   ──> url.js
 
 ├── models
-│   └── url.js
+│   ──> url.js
 
 ├── routes
-│   └── url.js
+│   ──> url.js
 
 ├── connect.js
 
