@@ -61,3 +61,16 @@ A simple URL shortener application built using Node.js, Express, and Mongoose. T
   {
     "url": "https://example.com"
   }
+
+### Project Structure
+  .
+├── controllers
+│   └── url.js
+├── models
+│   └── url.js
+├── routes
+│   └── url.js
+├── connect.js
+├── index.js
+└── README.md
+
