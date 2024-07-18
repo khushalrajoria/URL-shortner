@@ -62,6 +62,14 @@ A simple URL shortener application built using Node.js, Express, and Mongoose. T
     "url": "https://example.com"
   }
 
+### Shorterned URLs list
+##(on moongose)
+![image](https://github.com/user-attachments/assets/245111b6-e012-4110-ae7b-ad30f947934d)
+
+## POSTMAN result
+![image](https://github.com/user-attachments/assets/dfd5e3bd-dbd0-481c-9142-031f78cad2eb)
+
+
 ### Project Structure
 ├── controllers
 │   ──> url.js
