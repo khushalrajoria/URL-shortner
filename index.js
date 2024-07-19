@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const staticrouter=require("./routes/staticRouter");
 const path =require("path");
 const URL = require("./models/url")
 const urlRoute = require("./routes/url");
@@ -13,19 +14,14 @@ connectMongoDb("mongodb://127.0.0.1:27017/short-URL").then(() => console.log("Mo
 app.set("view engine","ejs");
 app.set("views",path.resolve("./views")); // this is basically telling our express that all our views will be available here
 // Middleware to parse JSON bodies
-app.use(express.json());
+app.use(express.json()); // so as we are using form data and we are using json so we need another middleware
+app.use(express.urlencoded({extended:false})); // means we will also support form data
 
 // Use URL rxoutes
 app.use("/url", urlRoute);
 
-app.get("/test",async (req,res)=>{ 
-    // return res.end("<h1>Hey hello from server</h1>"); // for this type of rendering there are template engines like -> EJS(Embedded javascript templating), pugs or handlebars
-    const allURLs=await URL.find({}); // it will get all the urls
-    return res.render("home", // we can even pass variables
-        {urls:allURLs,}
+app.use("/",staticrouter);
 
-    );
-});
 
 /*
 just noticed something that if this app.get  test was below app.get short id, it won't render and i don't know the reason for it but it's terrifying 

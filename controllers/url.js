@@ -13,7 +13,8 @@ async function handleGenerateNewShortURL(req, res) {
             redirectUrl: body.url,
             visitHistory: [],
         }); 
-        return res.json({ id: shortID });
+        return res.render("home",{id: shortID})
+        // return res.json({ id: shortID }); // rather than sending json response we are now rendering UI
     } catch (error) {
         console.error("Error in handleGenerateNewShortURL:", error);
         return res.status(500).json({ error: "Server error" });
