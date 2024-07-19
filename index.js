@@ -14,15 +14,31 @@ app.use(express.json());
 // Use URL rxoutes
 app.use("/url", urlRoute);
 
-app.get("/test",(req,res)=>{ 
-    return res.end("<h1>Hey hello from server</h1>");
+app.get("/test",async (req,res)=>{ 
+    // return res.end("<h1>Hey hello from server</h1>"); // for this type of rendering there are template engines like -> EJS(Embedded javascript templating), pugs or handlebars
+    const allURLs=await URL.find({}); // it will get all the urls
+    return res.end(
+        `
+        <html>
+        <head>
+        <body>
+        <ol>
+        ${allURLs.map(url=>`<li>${url.shortId}-${url.redirectUrl}-${url.visitHistory.length}</li>`).join('')}
+        </ol>
+        </body>
+        </head>
+        </html>
+        `
+
+    )
 });
 
 /*
 just noticed something that if this app.get  test was below app.get short id, it won't render and i don't know the reason for it but it's terrifying 
 that my correct code and so easy on giving errors
+one of the reason can be these urls are crashing as shortID is dynamic and will accept anything
 */
-app.get("/:shortId", async (req, res) => {
+app.get("/url/:shortId", async (req, res) => {
     const shortId = req.params.shortId;
     const entry= await URL.findOneAndUpdate(
     {
