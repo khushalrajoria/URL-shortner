@@ -14,6 +14,14 @@ app.use(express.json());
 // Use URL rxoutes
 app.use("/url", urlRoute);
 
+app.get("/test",(req,res)=>{ 
+    return res.end("<h1>Hey hello from server</h1>");
+});
+
+/*
+just noticed something that if this app.get  test was below app.get short id, it won't render and i don't know the reason for it but it's terrifying 
+that my correct code and so easy on giving errors
+*/
 app.get("/:shortId", async (req, res) => {
     const shortId = req.params.shortId;
     const entry= await URL.findOneAndUpdate(
@@ -31,9 +39,6 @@ app.get("/:shortId", async (req, res) => {
     res.redirect(entry.redirectUrl);
 });
 
-app.get("/test",(req,res)=>{
-    return res.end("<h1>Hey hello from server</h1>");
-});
 
 // Start the server
 app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
