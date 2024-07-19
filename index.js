@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const path =require("path");
 const URL = require("./models/url")
 const urlRoute = require("./routes/url");
 const { connectMongoDb } = require("./connect");
@@ -8,6 +9,9 @@ const PORT = 8001;
 // Connect to MongoDB
 connectMongoDb("mongodb://127.0.0.1:27017/short-URL").then(() => console.log("MongoDB connected"));
 
+// setting view engine
+app.set("view engine","ejs");
+app.set("views",path.resolve("./views")); // this is basically telling our express that all our views will be available here
 // Middleware to parse JSON bodies
 app.use(express.json());
 
@@ -17,20 +21,10 @@ app.use("/url", urlRoute);
 app.get("/test",async (req,res)=>{ 
     // return res.end("<h1>Hey hello from server</h1>"); // for this type of rendering there are template engines like -> EJS(Embedded javascript templating), pugs or handlebars
     const allURLs=await URL.find({}); // it will get all the urls
-    return res.end(
-        `
-        <html>
-        <head>
-        <body>
-        <ol>
-        ${allURLs.map(url=>`<li>${url.shortId}-${url.redirectUrl}-${url.visitHistory.length}</li>`).join('')}
-        </ol>
-        </body>
-        </head>
-        </html>
-        `
+    return res.render("home", // we can even pass variables
+        {urls:allURLs,}
 
-    )
+    );
 });
 
 /*
