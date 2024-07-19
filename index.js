@@ -16,18 +16,24 @@ app.use("/url", urlRoute);
 
 app.get("/:shortId", async (req, res) => {
     const shortId = req.params.shortId;
-    await URL.findOneAndUpdate({
+    const entry= await URL.findOneAndUpdate(
+    {
         shortId
-    }, {
+    }, 
+    {
         $push: {
-            visitHistory:{ timeStamp:
-                Date.now(),
+            visitHistory:{ 
+                timeStamp:Date.now(),
             },
         },
      }
     );
-    res.redirect(entry.redirectURL);
-})
+    res.redirect(entry.redirectUrl);
+});
+
+app.get("/test",(req,res)=>{
+    return res.end("<h1>Hey hello from server</h1>");
+});
 
 // Start the server
 app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
