@@ -4,7 +4,7 @@ const path =require("path");
 const URL = require("./models/url")
 const cookieParser=require("cookie-parser");
 const { connectMongoDb } = require("./connect");
-const {restrictToLoggedInUserOnly}=require("./middlewares/auth");
+const {restrictToLoggedInUserOnly,checkAuth}=require("./middlewares/auth");
 const PORT = 8001;
 
 
@@ -27,7 +27,7 @@ app.use(cookieParser());
 
 // Use URL rxoutes
 app.use("/url", restrictToLoggedInUserOnly,urlRoute);
-app.use("/",staticrouter);
+app.use("/",checkAuth,staticrouter);
 app.use("/user",UserRoute);
 
 app.get("/url/:shortId", async (req, res) => {

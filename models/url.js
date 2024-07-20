@@ -12,7 +12,13 @@ const urlSchema = new mongoose.Schema({
     },
     visitHistory: [{
         timeStamp: { type: Number }
-    }]
+    }], // now we want that a logged in user only can see his own search history
+    createdBy:{
+        type: mongoose.Schema.Types.ObjectId, // means that we will give a id here
+        ref: "users" // means that it will give refrence to user
+    }
+
+
 }, {
     timestamps: true
 });
