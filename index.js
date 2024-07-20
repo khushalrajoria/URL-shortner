@@ -1,11 +1,16 @@
 const express = require("express");
 const app = express();
-const staticrouter=require("./routes/staticRouter");
 const path =require("path");
 const URL = require("./models/url")
-const urlRoute = require("./routes/url");
 const { connectMongoDb } = require("./connect");
 const PORT = 8001;
+
+
+const staticrouter=require("./routes/staticRouter");
+const urlRoute = require("./routes/url");
+const UserRoute = require("./routes/user");
+
+
 
 // Connect to MongoDB
 connectMongoDb("mongodb://127.0.0.1:27017/short-URL").then(() => console.log("MongoDB connected"));
@@ -19,8 +24,8 @@ app.use(express.urlencoded({extended:false})); // means we will also support for
 
 // Use URL rxoutes
 app.use("/url", urlRoute);
-
 app.use("/",staticrouter);
+app.use("/user",UserRoute);
 
 
 /*
