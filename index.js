@@ -2,7 +2,9 @@ const express = require("express");
 const app = express();
 const path =require("path");
 const URL = require("./models/url")
+const cookieParser=require("cookie-parser");
 const { connectMongoDb } = require("./connect");
+const {restrictToLoggedInUserOnly}=require("./middlewares/auth");
 const PORT = 8001;
 
 
@@ -21,9 +23,10 @@ app.set("views",path.resolve("./views")); // this is basically telling our expre
 // Middleware to parse JSON bodies
 app.use(express.json()); 
 app.use(express.urlencoded({extended:false})); 
+app.use(cookieParser()); 
 
 // Use URL rxoutes
-app.use("/url", urlRoute);
+app.use("/url", restrictToLoggedInUserOnly,urlRoute);
 app.use("/",staticrouter);
 app.use("/user",UserRoute);
 
@@ -48,7 +51,3 @@ app.get("/url/:shortId", async (req, res) => {
 // Start the server
 app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
 
-
-
-/*  so for keeping a logged in state we can use a temp session and for this we 
-will install a package called uuid that will generate session key for authentication during the logged in period */
