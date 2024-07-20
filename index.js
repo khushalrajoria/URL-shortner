@@ -19,20 +19,14 @@ connectMongoDb("mongodb://127.0.0.1:27017/short-URL").then(() => console.log("Mo
 app.set("view engine","ejs");
 app.set("views",path.resolve("./views")); // this is basically telling our express that all our views will be available here
 // Middleware to parse JSON bodies
-app.use(express.json()); // so as we are using form data and we are using json so we need another middleware
-app.use(express.urlencoded({extended:false})); // means we will also support form data
+app.use(express.json()); 
+app.use(express.urlencoded({extended:false})); 
 
 // Use URL rxoutes
 app.use("/url", urlRoute);
 app.use("/",staticrouter);
 app.use("/user",UserRoute);
 
-
-/*
-just noticed something that if this app.get  test was below app.get short id, it won't render and i don't know the reason for it but it's terrifying 
-that my correct code and so easy on giving errors
-one of the reason can be these urls are crashing as shortID is dynamic and will accept anything
-*/
 app.get("/url/:shortId", async (req, res) => {
     const shortId = req.params.shortId;
     const entry= await URL.findOneAndUpdate(
@@ -53,3 +47,8 @@ app.get("/url/:shortId", async (req, res) => {
 
 // Start the server
 app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
+
+
+
+/*  so for keeping a logged in state we can use a temp session and for this we 
+will install a package called uuid that will generate session key for authentication during the logged in period */
