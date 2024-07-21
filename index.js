@@ -51,3 +51,13 @@ app.get("/url/:shortId", async (req, res) => {
 // Start the server
 app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
 
+
+
+/*
+    so when we maintain state for keeping track of our login etc we use up server's memory so in order to avoid it 
+    we can use stateless login, meaning we can use tokens and then by those tokens we can provide both id and session id
+    to the user it self but with the signature or stamp to confirm that it is provided by us
+
+
+    for that we will use a library called json web tokens
+*/
