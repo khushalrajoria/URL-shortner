@@ -125,17 +125,17 @@ A simple URL shortener application built using Node.js, Express, and Mongoose. T
 
 ![image](https://github.com/user-attachments/assets/dfd5e3bd-dbd0-481c-9142-031f78cad2eb)
 
-###UI
+### UI
 
-##HOME page
+## HOME page
 
 ![image](https://github.com/user-attachments/assets/8b961ce0-f581-4e3c-802a-dfcb78f78505)
 
-##LOGIN PAGE
+## LOGIN PAGE
 
 ![image](https://github.com/user-attachments/assets/7dcfd9d1-ecb8-423d-804d-5bbaf0cfbf80)
 
-##SIGNUP
+## SIGNUP
 
 ![image](https://github.com/user-attachments/assets/bf15010a-880c-4cc2-82a3-d234bf80da7f)
 
