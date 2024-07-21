@@ -8,6 +8,7 @@ A simple URL shortener application built using Node.js, Express, and Mongoose. T
 - Record timestamp of URL shortening.
 - Track the number of clicks (visit history).
 - Redirect to the original link using the short link.
+- User authentication (signup, login).
 - Tested using Postman.
 
 ## Prerequisites
@@ -61,28 +62,83 @@ A simple URL shortener application built using Node.js, Express, and Mongoose. T
   {
     "url": "https://example.com"
   }
+  ```
 
-### Shorterned URLs list
-##(on moongose)
+### Login
+
+- **Endpoint:** `POST /auth/login`
+- **Description:** Authenticates a user.
+- **Request Body:**
+  ```json
+  {
+    "username": "your-username",
+    "password": "your-password"
+  }
+  ```
+
+### Signup
+
+- **Endpoint:** `POST /auth/signup`
+- **Description:** Registers a new user.
+- **Request Body:**
+  ```json
+  {
+    "username": "your-username",
+    "password": "your-password"
+  }
+  ```
+
+## Project Structure
+
+```
+├── controllers
+│   ├── url.js
+│   └── user.js
+├── middlewares
+│   └── auth.js
+├── models
+│   ├── url.js
+│   └── user.js
+├── routes
+│   ├── staticRouter.js
+│   ├── url.js
+│   └── user.js
+├── services
+│   └── auth.js
+├── views
+│   ├── home.ejs
+│   ├── login.ejs
+│   └── signup.ejs
+├── .gitignore
+├── connect.js
+├── index.js
+├── package.json
+├── package-lock.json
+└── README.md
+```
+
+### Shortened URLs List (on MongoDB)
+
 ![image](https://github.com/user-attachments/assets/245111b6-e012-4110-ae7b-ad30f947934d)
 
-## POSTMAN result
+### Postman Result
+
 ![image](https://github.com/user-attachments/assets/dfd5e3bd-dbd0-481c-9142-031f78cad2eb)
 
+## UI
 
-### Project Structure
-├── controllers
-│   ──> url.js
+### HOME page
 
-├── models
-│   ──> url.js
+![image](https://github.com/user-attachments/assets/8b961ce0-f581-4e3c-802a-dfcb78f78505)
 
-├── routes
-│   ──> url.js
+### LOGIN PAGE
 
-├── connect.js
+![image](https://github.com/user-attachments/assets/7dcfd9d1-ecb8-423d-804d-5bbaf0cfbf80)
 
-├── index.js
+### SIGNUP
 
-└── README.md
+![image](https://github.com/user-attachments/assets/bf15010a-880c-4cc2-82a3-d234bf80da7f)
+
+
+
 
