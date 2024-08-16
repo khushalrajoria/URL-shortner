@@ -23,7 +23,7 @@ A simple URL shortener application built using Node.js, Express, and Mongoose. T
 1. Clone the repository:
 
     ```sh
-    git clone https://github.com/your-username/url-shortener.git
+    git clone https://github.com/khushalrajoria/url-shortener.git
     cd url-shortener
     ```
 
